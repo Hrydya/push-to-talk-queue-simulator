@@ -54,14 +54,12 @@ let queue = [];
 io.on('connection', (socket) => {
     console.log('new user connected:', socket.id)
 
-    //listen for event join
-    socket.on('join', (username) => {
-        users[socket.id] = username;
-        console.log(`${username} joined the channel, user ID: ${socket.id}`);
-    })
 
-    socket.emit('joined', `welcome ${users[socket.id]}`)
-
+socket.on('join', (username) => {
+    users[socket.id] = username;
+    console.log(`${username} joined the channel, user ID: ${socket.id}`);
+    socket.emit('joined', `welcome ${username}`);
+});
 
     //Request to talk 
     socket.on('request_to_talk', (username) => {
