@@ -79,7 +79,7 @@ const startApp = (data) => {
     document.getElementById('chat-screen').style.display = 'block';
 
     // Connect to socket
-    socket = io('http://localhost:3000', { auth: { token: data.token } });
+    socket = io({ auth: { token: data.token } });
 
     // Socket events
     socket.on('connect', () => {
