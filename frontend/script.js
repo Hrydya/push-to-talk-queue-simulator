@@ -21,7 +21,7 @@ const Login = async () => {
     }
 
     try {
-        const response = await fetch('http://localhost:3000/api/auth/login', {
+        const response = await fetch('/api/auth/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, password })
@@ -49,7 +49,7 @@ const Register = async () => {
     }
 
     try {
-        const response = await fetch('http://localhost:3000/api/auth/register', {
+        const response = await fetch('/api/auth/register', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, password })
@@ -99,6 +99,10 @@ const startApp = (data) => {
     socket.on('queued', (data) => {
         document.getElementById('talk-btn').textContent = `Waiting #${data.position}`;
     });
+    socket.on('connect_error', (err) => {
+    console.error('Socket auth failed:', err.message);
+    alert('Socket connection failed. Please login again.');
+});
 };
 
 const requestTalk = () => {
